@@ -41,19 +41,36 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login</h1>
                                     </div>
-                                    <form class="user">
+                                    {{-- ERROR LOGIN ATAU VALIDASI --}}
+                                    @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul class="mb-0">
+                                            @foreach ($errors->all() as $err)
+                                            <li>{{ $err }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    @endif
+
+                                    <form class="user" action="/login" method="POST">
+                                        @csrf
+
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                placeholder="Enter Email Address...">
+                                            <input type="email" name="email" class="form-control form-control-user"
+                                                placeholder="Enter Email Address..." value="{{ old('email') }}">
                                         </div>
+
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input type="password" name="password" class="form-control form-control-user"
                                                 placeholder="Password">
                                         </div>
-                                        <a href="#" class="btn btn-primary btn-user btn-block">
+
+                                        <button class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
+
                                     </form>
+
                                 </div>
                             </div>
                         </div>
